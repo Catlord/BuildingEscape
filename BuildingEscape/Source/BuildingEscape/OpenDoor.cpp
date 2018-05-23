@@ -61,7 +61,9 @@ float UOpenDoor::GetTotalMassOfActorsOnPLate() {
 	for (const auto* Actor : OverlappingActors)
 	{
 		TotalMass += Actor->FindComponentByClass<UPrimitiveComponent>()->GetMass();
-		UE_LOG(LogTemp, Warning, TEXT("%s on pressure plate"), *Actor->GetName())
+		//UE_LOG(LogTemp, Warning, TEXT("%s on pressure plate"), *Actor->GetName())
+		// remember to click in "generate overlap events" in collision in unreal editor on each object you can 
+		// stackle to make them efficient on pressure pad ( if not weight is still at 0 and doors will stay closed )
 	}
 
 	return TotalMass;
