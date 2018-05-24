@@ -50,6 +50,7 @@ void UGrabber::Grab() {
 
 	if (ActorHit) {
 		if (!PhysicsHandle) { return; }
+		/// attach Physic handle
 		PhysicsHandle->GrabComponent(
 			ComponentToGrab,
 			NAME_None, // no bones needed
