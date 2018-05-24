@@ -10,7 +10,7 @@ UGrabber::UGrabber()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	bWantsBeginPlay = true;
+	//bWantsBeginPlay = true;
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
@@ -49,6 +49,7 @@ void UGrabber::Grab() {
 	auto ActorHit = HitResult.GetActor();
 
 	if (ActorHit) {
+		if (!PhysicsHandle) { return; }
 		PhysicsHandle->GrabComponent(
 			ComponentToGrab,
 			NAME_None, // no bones needed
@@ -60,6 +61,7 @@ void UGrabber::Grab() {
 
 void UGrabber::Release() {
 	//UE_LOG(LogTemp, Warning, TEXT("Grab released"))
+	if (!PhysicsHandle) { return; }
 	PhysicsHandle->ReleaseComponent();
 }
 
@@ -68,7 +70,7 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// Get player view point this tick
-
+	if (!PhysicsHandle) { return; }
 	if (PhysicsHandle->GrabbedComponent) {
 		PhysicsHandle->SetTargetLocation(GetReachLineEnd());
 	}
